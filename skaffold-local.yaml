@@ -1,4 +1,4 @@
-# SKAFFOLD FILE FOR CLOUD DEV
+# SKAFFOLD FILE FOR LOCAL DEV
 apiVersion: skaffold/v2beta19
 kind: Config
 deploy:
@@ -6,12 +6,10 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-# local:
-#   push: false
-  googleCloudBuild:
-    projectId: bazar-dev-96
+  local:
+    push: false
   artifacts:
-    - image: us.gcr.io/bazar-dev-96/auth
+    - image: yousfihamza/auth
       context: auth
       docker:
         dockerfile: Dockerfile
