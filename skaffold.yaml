@@ -2,12 +2,12 @@
 apiVersion: skaffold/v2beta19
 kind: Config
 deploy:
-  kubectl: 
+  kubectl:
     manifests:
       - ./infra/k8s/*
 build:
-# local:
-#   push: false
+  # local:
+  #   push: false
   googleCloudBuild:
     projectId: bazar-dev-96
   artifacts:
