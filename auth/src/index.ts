@@ -2,12 +2,14 @@ import { NotFoundError } from './errors/not-found-error'
 import { errorHandler } from './middlewares/error-handler'
 import express from 'express'
 import 'express-async-errors'
+import mongoose from 'mongoose'
 
 import { json } from 'body-parser'
 import { currentUserRouter } from './routes/current-user'
 import { signInRouter } from './routes/signin'
 import { signOutRouter } from './routes/signout'
 import { signUpRouter } from './routes/signup'
+import { DatabaseConnectionError } from './errors/database-connection-error'
 
 const app = express()
 app.use(json())
@@ -24,6 +26,22 @@ app.all('*', async () => {
 
 app.use(errorHandler)
 
+const start = async () => {
+  try {
+    const db = await mongoose.connect('mongodb://auth-mongo-srv:27017/auth', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    })
+    console.log('connection success !')
+    return db
+  } catch (err) {
+    throw new DatabaseConnectionError('Error Connecting to database')
+  }
+}
+
 app.listen(3000, () => {
-  console.log('🔥 Listening on port -> 3000 🔥 !')
+  console.log('🔥 Listening on port -> 3000 🔥')
 })
+
+start()
