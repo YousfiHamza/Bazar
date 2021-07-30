@@ -2,6 +2,9 @@ import { DatabaseConnectionError } from './../errors/database-connection-error'
 import express, { Request, Response } from 'express'
 import { body, validationResult } from 'express-validator'
 import { RequestValidationError } from '../errors/request-validation-error'
+import { User } from '../models/user.model'
+import { BadRequestError } from '../errors/bad-request-error'
+import { Password } from '../utils/password'
 
 const router = express.Router()
 
@@ -21,8 +24,20 @@ router.post(
       throw new RequestValidationError(errors.array())
     }
 
-    console.log('Creating User')
-    throw new DatabaseConnectionError('Error Connecting to database')
+    const { email, password } = req.body
+
+    const existingUser = await User.findOne({ email })
+
+    if (existingUser) {
+      console.log('Email in Use !')
+      throw new BadRequestError('Email Already In Use !')
+    }
+
+    const user = User.buildUser({ email, password })
+    await user.save()
+
+    console.log('User Created !')
+    res.status(201).send(user)
   }
 )
 
