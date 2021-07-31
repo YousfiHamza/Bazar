@@ -3,6 +3,7 @@ import { errorHandler } from './middlewares/error-handler'
 import express from 'express'
 import 'express-async-errors'
 import mongoose from 'mongoose'
+import cookieSession from 'cookie-session'
 
 import { json } from 'body-parser'
 import { currentUserRouter } from './routes/current-user'
@@ -12,7 +13,14 @@ import { signUpRouter } from './routes/signup'
 import { DatabaseConnectionError } from './errors/database-connection-error'
 
 const app = express()
+app.set('trust proxy', true) // trust traffic even if its comming from proxy (NGNIX)
 app.use(json())
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true, // only used for https connections
+  })
+)
 
 app.use(currentUserRouter)
 app.use(signInRouter)

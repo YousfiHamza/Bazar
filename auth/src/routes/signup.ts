@@ -5,6 +5,7 @@ import { RequestValidationError } from '../errors/request-validation-error'
 import { User } from '../models/user.model'
 import { BadRequestError } from '../errors/bad-request-error'
 import { Password } from '../utils/password'
+import jwt from 'jsonwebtoken'
 
 const router = express.Router()
 
@@ -34,7 +35,23 @@ router.post(
     }
 
     const user = User.buildUser({ email, password })
-    await user.save()
+    try {
+      await user.save()
+    } catch (e) {
+      throw new DatabaseConnectionError(e.message)
+    }
+
+    const userJwt = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+      },
+      'secretKEY'
+    )
+
+    req.session = {
+      jwt: userJwt,
+    }
 
     console.log('User Created !')
     res.status(201).send(user)
