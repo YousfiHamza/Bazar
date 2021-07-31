@@ -35,21 +35,23 @@ app.all('*', async () => {
 app.use(errorHandler)
 
 const start = async () => {
+  if (!process.env.JWT_KEY) {
+    throw Error(' JWT_KEY must be defined ! ')
+  }
   try {
-    const db = await mongoose.connect('mongodb://auth-mongo-srv:27017/auth', {
+    await mongoose.connect('mongodb://auth-mongo-srv:27017/auth', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
     })
-    console.log('connection success !')
-    return db
+    console.log('DB connection success !')
   } catch (err) {
     throw new DatabaseConnectionError('Error Connecting to database')
   }
-}
 
-app.listen(3000, () => {
-  console.log('🔥 Listening on port -> 3000 🔥')
-})
+  app.listen(3000, () => {
+    console.log('🔥 Listening on port -> 3000 🔥')
+  })
+}
 
 start()

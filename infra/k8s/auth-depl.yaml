@@ -16,6 +16,12 @@ spec:
       containers:
         - name: auth
           image: us.gcr.io/bazar-dev-96/auth
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 ---
 # Service Section for ClusterIP creation
 apiVersion: v1
