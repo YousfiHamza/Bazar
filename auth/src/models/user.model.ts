@@ -18,16 +18,28 @@ interface UserDoc extends mongoose.Document {
   password: string
 }
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-})
+  {
+    toJSON: {
+      transform(doc, ret) {
+        delete ret.password
+        delete ret.__v
+        ret.id = ret._id
+        delete ret._id
+      },
+    },
+  }
+)
 
 // too fancy syntax - we can easily use bcrypt !
 // we dont use arrow fct so the value of 'this' will be the valuer of the user we want to persist instead of refering to the file
