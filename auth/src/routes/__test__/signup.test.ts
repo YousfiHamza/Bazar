@@ -16,7 +16,9 @@ const onlyPassword = {
 
 describe('Sign Up Route', () => {
   it('returns a 201 on success', async () => {
-    await request(app).post('/api/users/signup').send(user).expect(201)
+    const resp = await request(app).post('/api/users/signup').send(user)
+    expect(resp.statusCode).toEqual(201)
+    expect(resp.body.email).toEqual(user.email)
   })
   it('returns a 400 if only Email', async () => {
     await request(app).post('/api/users/signup').send(onlyEmail).expect(400)
