@@ -9,6 +9,7 @@
     "cypress": "cypress open"
   },
   "dependencies": {
+    "bootstrap": "^5.0.2",
     "eslint-plugin-cypress": "^2.11.3",
     "next": "10.0.6",
     "react": "17.0.1",
