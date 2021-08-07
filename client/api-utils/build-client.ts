@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { NextPageContext } from 'next/dist/next-server/lib/utils'
 
-const buildClient = ({ req }) => {
+const buildClient = ({ req }: NextPageContext) => {
   if (typeof window === 'undefined') {
     // we are on the server
     return axios.create({

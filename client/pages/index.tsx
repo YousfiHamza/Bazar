@@ -16,10 +16,10 @@ const Home = ({ currentUser }) => {
   )
 }
 
-Home.getInitialProps = async ({ req }: NextPageContext) => {
-  const client = buildClient({ req })
-  const data = await client.get('/api/users/currentuser')
-  return data.data
+Home.getInitialProps = async (ctx: NextPageContext) => {
+  const client = buildClient(ctx)
+  const { data } = await client.get('/api/users/currentuser')
+  return data
 }
 
 export default Home
