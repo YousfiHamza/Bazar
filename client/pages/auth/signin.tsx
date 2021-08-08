@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { ErrorModel } from '../models/error.model'
+import { ErrorModel } from '../../models/error.model'
 import useRequest from '../../hooks/useRequest'
 import Router from 'next/router'
 
