@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { useState } from 'react'
-import { ErrorModel } from '../pages/models/error.model'
+import { ErrorModel } from '../models/error.model'
 
 const useRequest = ({ url, methode, body, onSuccess }) => {
   const [errors, setErrors] = useState<ErrorModel[]>([])
