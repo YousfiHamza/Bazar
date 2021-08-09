@@ -2,6 +2,7 @@ import app, { AppContext, AppProps } from 'next/app'
 import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import buildClient from '../api-utils/build-client'
+import Header from '../components/header'
 
 interface myProps extends AppProps {
   currentUser: {
@@ -13,7 +14,7 @@ interface myProps extends AppProps {
 const App = ({ Component, pageProps, currentUser }: myProps) => {
   return (
     <div>
-      {currentUser && <h1>Hello {currentUser.email}</h1>}
+      <Header currentUser={currentUser} />
       <Component {...pageProps} />
     </div>
   )
