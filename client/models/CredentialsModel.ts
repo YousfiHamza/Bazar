@@ -1,4 +1,4 @@
-export interface credentialsModel {
+export interface CredentialsModel {
   email: string
   password: string
 }
