@@ -38,10 +38,11 @@ const SignIn = () => {
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <h1>Sign In</h1>
+        <h1 className="title">Sign In</h1>
         <div className="form-group">
           <label>Email Address :</label>
           <input
+            data-testid="input-email"
             onChange={handleChange}
             value={inputForm.email}
             name="email"
@@ -52,6 +53,7 @@ const SignIn = () => {
         <div className="form-group">
           <label>Password :</label>
           <input
+            data-testid="input-password"
             onChange={handleChange}
             value={inputForm.password}
             name="password"
@@ -59,11 +61,11 @@ const SignIn = () => {
             type="password"
           />
         </div>
-        <button className="btn btn-primary">Sign In</button>
+        <button className="btn btn-primary">Submit</button>
       </form>
       {errors.length > 0 && (
         <div className="alert alert-danger">
-          <h4>Ooopps ... </h4>
+          <h4 data-testid="oops">Ooopps ... </h4>
           <ul className="my-0">{displayErrors()}</ul>
         </div>
       )}

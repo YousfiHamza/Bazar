@@ -38,10 +38,11 @@ const SignUp = () => {
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
+        <h1 className="title">Sign Up</h1>
         <div className="form-group">
           <label>Email Address :</label>
           <input
+            data-testid="input-email"
             onChange={handleChange}
             value={inputForm.email}
             name="email"
@@ -52,6 +53,7 @@ const SignUp = () => {
         <div className="form-group">
           <label>Password :</label>
           <input
+            data-testid="input-password"
             onChange={handleChange}
             value={inputForm.password}
             name="password"
