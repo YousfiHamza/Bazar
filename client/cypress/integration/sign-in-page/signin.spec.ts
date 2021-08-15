@@ -3,17 +3,8 @@
 
 describe('Sign In Page Normal display', () => {
 
-//   before(() => {
-
-//     cy.visit('https://bazar.dev/auth/signin')
-
-//   })
-
   const myEmail = 'myEmail@test.com'
   const myPassword = 'password'
-
-  const wrongEmail = 'myEmail'
-  const wrongPassword = '123'
 
   beforeEach(() => {
     cy.visit('https://bazar.dev/auth/signin')
