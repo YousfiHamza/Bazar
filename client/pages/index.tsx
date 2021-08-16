@@ -3,7 +3,7 @@ import Head from 'next/head'
 import buildClient from '../api-utils/build-client'
 
 const Home = ({ currentUser }) => {
-  console.log(currentUser)
+  console.log(currentUser.email)
   return (
     <>
       <Head>
