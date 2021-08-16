@@ -3,8 +3,8 @@
 
 describe.only('Sign Up Page Normal display', () => {
 
-  const myEmail = 'myEmail3@test.com'
-  const myPassword = 'password2'
+  const myEmail = 'myEmail@test.com'
+  const myPassword = 'password'
 
   beforeEach(() => {
     cy.visit('https://bazar.dev/auth/signup')
